@@ -4,7 +4,8 @@ import { navLinks } from "@/constants/links";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useState } from "react";
-import { FaBars, FaCartShopping, FaXmark } from "react-icons/fa6";
+// import { FaBars, FaCartShopping, FaXmark } from "react-icons/fa6";
+import { FaBars, FaXmark } from "react-icons/fa6";
 import logo from "../public/DIS_Logo_Dark.png";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -59,12 +60,14 @@ const NavLinks = ({ closeMenu }: { closeMenu: () => void }) => {
                 </Link>
             ))}
             <Link
-                href="https://www.ebay.com/itm/396119923371"
+                // href="https://www.ebay.com/itm/396119923371"
+                href="https://github.com/Ninkuk/drive-insight-website"
                 target="_blank"
                 onClick={closeMenu}>
                 <Button className="w-fit">
-                    <FaCartShopping className="mr-2" />
-                    Buy Now
+                    {/* <FaCartShopping className="mr-2" /> */}
+                    See GitHub Repo
+                    {/* Buy Now */}
                 </Button>
             </Link>
         </div>

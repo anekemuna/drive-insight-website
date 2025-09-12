@@ -1,4 +1,4 @@
-import { CallToActionButton } from "./CallToActionButton";
+// import { CallToActionButton } from "./CallToActionButton";
 
 // export const HeroSection = () => {
 //     return (
@@ -60,7 +60,7 @@ export const HeroSection = () => {
                 actionable driving insights.
             </p>
 
-            <CallToActionButton />
+            {/* <CallToActionButton /> */}
         </div>
     );
 };
