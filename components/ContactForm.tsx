@@ -9,6 +9,7 @@ import { Checkbox } from "./ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import toast from "react-hot-toast";
 
 const CATEGORY_OPTIONS = ["Device", "App", "Shipping", "Other"] as const;
 
@@ -43,11 +44,11 @@ export default function ContactForm() {
 
             if (!res.ok) throw new Error("Error sending message");
 
-            alert("Thank you for your message! We will get back to you soon.");
+            toast.success("Thank you for your message! We will get back to you soon.");
             form.reset();
         } catch (e) {
             console.error("Form Error:", e);
-            alert("Error submitting form. Please try again");
+            toast.error("Error submitting form. Please try again");
         }
     };
 

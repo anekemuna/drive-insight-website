@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
+//import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
-import Link from "next/link";
-import {
-    FaDiscord,
-    FaEnvelope,
-    FaInstagram,
-    FaLinkedin,
-} from "react-icons/fa6";
+// import Link from "next/link";
+// import {
+//     FaDiscord,
+//     FaEnvelope,
+//     FaInstagram,
+//     FaLinkedin,
+// } from "react-icons/fa6";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
@@ -36,14 +36,8 @@ export default function Support() {
 
             <ContactForm />
 
-            <div>
-                <h3 className="text-center">More Options</h3>
-                <p className="text-center">
-                    
-                </p>
-            </div>
 
-            <div className="flex flex-col items-center gap-2">
+            {/* <div className="flex flex-col items-center gap-2">
                 <Button
                     className="w-full bg-red-500 text-white md:w-1/4"
                     variant="link"
@@ -86,7 +80,7 @@ export default function Support() {
                         LinkedIn
                     </Link>
                 </Button>
-            </div>
+            </div> */}
             
         </div>
     );
