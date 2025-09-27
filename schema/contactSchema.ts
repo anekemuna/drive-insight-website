@@ -8,6 +8,8 @@ export const contactSchema = z.object({
   phoneNumber: z.string().length(10, { message: "Please enter in a valid phone number" }),
   message: z.string().min(2, { message: "Please enter in a message" }).max(500),
   // category: z.enum(["a", "b", "c", "d"])
+  // In contactSchema.ts
+  category: z.array(z.enum(["Device", "App", "Shipping", "Other"])).optional()
 })
 
 export type ContactFormData = z.infer<typeof contactSchema>

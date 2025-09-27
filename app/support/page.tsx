@@ -7,6 +7,7 @@ import {
     FaInstagram,
     FaLinkedin,
 } from "react-icons/fa6";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
     title: "Drive Insight | Support",
@@ -22,12 +23,23 @@ export const metadata: Metadata = {
 };
 
 export default function Support() {
+
+
     return (
         <div className="container mx-auto flex h-full flex-col gap-10 py-5 lg:py-10">
             <div>
                 <h2 className="text-center">Contact Us</h2>
                 <p className="text-center">
                     For support, reach out to us via email or social media.
+                </p>
+            </div>
+
+            <ContactForm />
+
+            <div>
+                <h3 className="text-center">More Options</h3>
+                <p className="text-center">
+                    
                 </p>
             </div>
 
@@ -75,9 +87,7 @@ export default function Support() {
                     </Link>
                 </Button>
             </div>
-
-            {/* // TODO: Add contact form */}
-            {/* <ContactForm /> */}
+            
         </div>
     );
 }

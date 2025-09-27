@@ -10,6 +10,8 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
+const CATEGORY_OPTIONS = ["Device", "App", "Shipping", "Other"] as const;
+
 export default function ContactForm() {
     const form = useForm<ContactFormData>({
         resolver: zodResolver(contactSchema),
@@ -22,14 +24,31 @@ export default function ContactForm() {
             countryCode: "US",
             phoneNumber: "",
             message: "",
+            category: [],
         },
     });
 
-    const onSubmit = (values: ContactFormData) => {
+    const onSubmit = async (values: ContactFormData) => {
         // const success = sendDiscordMessage(values);
         // TODO: Show confirmation message on the website: "Thank you for your message! We will get back to you soon."
 
         console.log(values);
+
+        try {
+            const res = await fetch("/api/sendEmail", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(values),
+            });
+
+            if (!res.ok) throw new Error("Error sending message");
+
+            alert("Thank you for your message! We will get back to you soon.");
+            form.reset();
+        } catch (e) {
+            console.error("Form Error:", e);
+            alert("Error submitting form. Please try again");
+        }
     };
 
     return (
@@ -86,7 +105,7 @@ export default function ContactForm() {
                             <FormItem>
                                 <FormControl>
                                     <select
-                                        className="w-full rounded-md border bg-input p-2 text-slate-100"
+                                        className="bg-input w-full rounded-md border p-2 text-slate-100"
                                         {...field}>
                                         <option value="US">US</option>
                                         <option value="CA">CA</option>
@@ -132,16 +151,48 @@ export default function ContactForm() {
                     )}
                 />
 
-                <div className="flex flex-wrap gap-4">
-                    {["Device", "App", "Shipping", "Other"].map((option) => (
-                        <label
-                            key={option}
-                            className="flex items-center space-x-2">
-                            <Checkbox className="accent-primary" />
-                            <span>{option}</span>
-                        </label>
-                    ))}
-                </div>
+                <FormField
+                    control={form.control}
+                    name="category"
+                    render={({ field }) => (
+                        <FormItem>
+                            <div className="flex flex-wrap gap-4">
+                                {CATEGORY_OPTIONS.map(
+                                    (option) => (
+                                        <label
+                                            key={option}
+                                            className="flex items-center space-x-2">
+                                            <Checkbox
+                                                checked={field.value?.includes(
+                                                    option,
+                                                )}
+                                                onCheckedChange={(checked) => {
+                                                    if (checked) {
+                                                        field.onChange([
+                                                            ...(field.value ||
+                                                                []),
+                                                            option,
+                                                        ]);
+                                                    } else {
+                                                        field.onChange(
+                                                            field.value?.filter(
+                                                                (item) =>
+                                                                    item !==
+                                                                    option,
+                                                            ),
+                                                        );
+                                                    }
+                                                }}
+                                            />
+                                            <span>{option}</span>
+                                        </label>
+                                    ),
+                                )}
+                            </div>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
                 <Button type="submit" className="w-full">
                     <FaPaperPlane />
