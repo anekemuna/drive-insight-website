@@ -54,7 +54,31 @@ export async function POST(req: Request) {
                             },
                         ],
                         Subject: `Form Submission: ${firstName} ${lastName} - ${firstCategory}`,
-                        TextPart: `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${countryCode} ${phoneNumber}\nMessage:\n${message}\nCategories: ${categoriesString}`,
+                        TextPart: `Name: ${firstName} ${lastName}
+						Email: ${email}
+						Phone: ${countryCode} ${phoneNumber}
+						Categories: ${categoriesString || "N/A"}
+						Message:
+						${message}
+						___________________________________
+						This message was submitted via Drive Insight's contact form`,
+						HTMLPart:`<div style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+							<h2>Form Submission: ${firstName} ${lastName} - ${firstCategory}</h2>
+							<table style="border-collapse: collapse; margin-top: 10px;">
+								<tr><td><strong>Name:</strong></td><td>${firstName} ${lastName}</td></tr>
+								<tr><td><strong>Email:</strong></td><td>${email}</td></tr>
+								<tr><td><strong>Phone:</strong></td><td>${countryCode} ${phoneNumber}</td></tr>
+								<tr><td><strong>Category:</strong></td><td>${categoriesString || "N/A"}</td></tr>
+							</table>
+							<div style="margin-top: 20px;">
+							<strong>Message:</strong>
+							<p style="white-space: pre-wrap;">${message}</p>
+							</div>
+							<hr style="margin-top: 30px;" />
+								<p style="font-size: 12px; color: #888;">
+								This message was sent via Drive Insight's contact form.
+								</p>
+						</div>`
                     },
                 ],
             });
